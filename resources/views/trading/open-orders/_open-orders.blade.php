@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @include('trading.components.open-order-row')
+                @include('trading.open-orders.components._row')
             </tbody>
         </table>
     </div>
