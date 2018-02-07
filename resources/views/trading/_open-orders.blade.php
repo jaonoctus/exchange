@@ -1,4 +1,3 @@
-
 <div class="card card-default">
     <div class="card-header text-uppercase">Open orders</div>
 

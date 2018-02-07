@@ -13,8 +13,11 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         @include('trading._order-book')
+                    </div>
+                    <div class="col-md-4">
+                        @include('trading._trade-history')
                     </div>
                 </div>
             </div>
