@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('trading-order-form', require('./components/trading/order-form/OrderForm'));
 
 const app = new Vue({
     el: '#app'
