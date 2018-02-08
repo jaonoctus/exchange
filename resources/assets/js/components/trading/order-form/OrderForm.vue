@@ -15,7 +15,7 @@
         <div class="form-group">
             <label>Amount</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="0.00" v-model="amount" @input="calculateTotal">
+                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="amount" @input="calculateTotal">
                 <div class="input-group-append">
                     <span class="input-group-text">BTC</span>
                 </div>
@@ -24,7 +24,7 @@
         <div class="form-group">
             <label>Price</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="0.00" v-model="price" @input="calculateTotal">
+                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="price" @input="calculateTotal">
                 <div class="input-group-append">
                     <span class="input-group-text">USD</span>
                 </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             <label>Total</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="0.00" v-model="total" @input="calculateAmount">
+                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="total" @input="calculateAmount">
                 <div class="input-group-append">
                     <span class="input-group-text">USD</span>
                 </div>
@@ -87,12 +87,15 @@
             calculateTotal () {
                 if (this.amount === '' || this.price === '') this.total = 0
 
-                if (this.amount > 0 && this.price > 0) this.total = this.amount * this.price
+                if (this.amount > 0 && this.price > 0) this.total = (this.amount * this.price).toFixed(2)
             },
             calculateAmount () {
                 if (this.total === '' || this.price === '') return
 
-                if (this.total > 0 && this.price > 0) this.amount = this.total / this.price
+                if (this.total > 0 && this.price > 0) this.amount = (this.total / this.price).toFixed(8)
+            },
+            setValue (variable, value) {
+                variable = value
             }
         }
     }
