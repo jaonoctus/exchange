@@ -17,6 +17,13 @@
             <div class="input-group mb-3">
                 <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="amount" @input="calculateTotal">
                 <div class="input-group-append">
+                    <button
+                            class="input-group-text"
+                            title="Calculate max amount using your available balance (BTC)"
+                            @click.prevent="getAvailableAmount"
+                            v-if="!buying">
+                        <i class="fa fa-fire"></i>
+                    </button>
                     <span class="input-group-text">BTC</span>
                 </div>
             </div>
@@ -26,6 +33,12 @@
             <div class="input-group mb-3">
                 <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="price" @input="calculateTotal">
                 <div class="input-group-append">
+                    <button
+                            class="input-group-text"
+                            :title="bestPriceTitle"
+                            @click.prevent="getBestPrice">
+                        <i class="fa fa-fire"></i>
+                    </button>
                     <span class="input-group-text">USD</span>
                 </div>
             </div>
@@ -35,6 +48,13 @@
             <div class="input-group mb-3">
                 <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="total" @input="calculateAmount">
                 <div class="input-group-append">
+                    <button
+                            class="input-group-text"
+                            title="Calculate max amount using your available balance (USD)"
+                            @click.prevent="getAvailableBalance"
+                            v-if="buying">
+                        <i class="fa fa-fire"></i>
+                    </button>
                     <span class="input-group-text">USD</span>
                 </div>
             </div>
@@ -66,14 +86,22 @@
         },
 
         computed: {
+            buying () {
+                return this.action === this.ORDER_ACTION.BUY
+            },
             buyOrderClass () {
-                return this.action === this.ORDER_ACTION.BUY ? 'btn-success' : 'btn-secondary'
+                return this.buying ? 'btn-success' : 'btn-secondary'
             },
             sellOrderClass () {
                 return this.action === this.ORDER_ACTION.SELL ? 'btn-danger' : 'btn-secondary'
             },
             placeOrderClass () {
-                return this.action === this.ORDER_ACTION.BUY ? 'btn-success' : 'btn-danger'
+                return this.buying ? 'btn-success' : 'btn-danger'
+            },
+            bestPriceTitle () {
+                return this.buying
+                    ? 'Set price field to current highest BTC/USD bid'
+                    : 'Set price field to current lowest BTC/USD ask'
             }
         },
 
@@ -94,8 +122,23 @@
 
                 if (this.total > 0 && this.price > 0) this.amount = (this.total / this.price).toFixed(8)
             },
-            setValue (variable, value) {
-                variable = value
+            getAvailableBalance () {
+                this.total = 5 // get available balance
+
+                this.calculateAmount()
+            },
+            getAvailableAmount () {
+                this.amount = 1 // get available amount
+
+                this.calculateTotal()
+            },
+            getBestPrice () {
+                // get best price
+                this.price = this.buying
+                    ? 9.9 // get highest bid
+                    : 10.1 // get lowest ask
+
+                this.calculateTotal()
             }
         }
     }
