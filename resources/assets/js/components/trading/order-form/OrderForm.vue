@@ -6,12 +6,12 @@
                 <button type="button" class="btn w-100"  :class="[sellOrderClass]" @click.prevent="setOrderAction(ORDER_ACTION.SELL)">SELL</button>
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label>Type</label>
             <select class="form-control" v-model="type">
                 <option v-for="type in types">{{ type }}</option>
             </select>
-        </div>
+        </div>-->
         <div class="form-group">
             <label>Amount</label>
             <div class="input-group mb-3">
