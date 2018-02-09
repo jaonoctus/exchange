@@ -2,8 +2,8 @@
     <form action="" class="mb-0">
         <div class="form-group">
             <div class="btn-group btn-group-lg d-flex">
-                <button type="button" class="btn w-100" :class="[buyOrderClass]" @click.prevent="setOrderAction(ORDER_ACTION.BUY)">BUY</button>
-                <button type="button" class="btn w-100"  :class="[sellOrderClass]" @click.prevent="setOrderAction(ORDER_ACTION.SELL)">SELL</button>
+                <button type="button" class="btn w-100" :class="[buyOrderClass]" @click.prevent="setOrderAction(ORDER_ACTION.BUY)" id="action_buy">BUY</button>
+                <button type="button" class="btn w-100"  :class="[sellOrderClass]" @click.prevent="setOrderAction(ORDER_ACTION.SELL)" id="action_sell">SELL</button>
             </div>
         </div>
         <!--<div class="form-group">
@@ -15,9 +15,17 @@
         <div class="form-group">
             <label>Amount</label>
             <div class="input-group mb-3">
-                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="amount" @input="calculateTotal">
+                <input
+                        id="input_amount"
+                        type="number"
+                        step="any"
+                        class="form-control"
+                        placeholder="0.00"
+                        v-model.number="amount"
+                        @input="calculateTotal">
                 <div class="input-group-append">
                     <button
+                            id="button_amount"
                             class="input-group-text"
                             title="Calculate max amount using your available balance (BTC)"
                             @click.prevent="getAvailableAmount"
@@ -31,9 +39,18 @@
         <div class="form-group">
             <label>Price</label>
             <div class="input-group mb-3">
-                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="price" @input="calculateTotal">
+                <input
+                        id="input_price"
+                        type="number"
+                        step="any"
+                        class="form-control"
+                        placeholder="0.00"
+                        v-model.number="price"
+                        @input="calculateTotal">
                 <div class="input-group-append">
                     <button
+                            id="button_price"
+                            name="order_form_price_quick"
                             class="input-group-text"
                             :title="bestPriceTitle"
                             @click.prevent="getBestPrice">
@@ -46,9 +63,18 @@
         <div class="form-group">
             <label>Total</label>
             <div class="input-group mb-3">
-                <input type="number" step="any" class="form-control" placeholder="0.00" v-model.number="total" @input="calculateAmount">
+                <input
+                        id="input_total"
+                        type="number"
+                        step="any"
+                        class="form-control"
+                        placeholder="0.00"
+                        v-model.number="total"
+                        @input="calculateAmount">
                 <div class="input-group-append">
                     <button
+                            id="button_total"
+                            name="order_form_total_quick"
                             class="input-group-text"
                             title="Calculate max amount using your available balance (USD)"
                             @click.prevent="getAvailableBalance"
@@ -80,7 +106,7 @@
             }
         },
 
-        created () {
+        mounted () {
             this.setOrderAction(this.ORDER_ACTION.BUY)
             this.getMarketPrice()
         },
@@ -110,7 +136,7 @@
                 this.action = action
             },
             getMarketPrice () {
-                this.price = 5
+                // TODO
             },
             calculateTotal () {
                 if (this.amount === '' || this.price === '') this.total = 0
