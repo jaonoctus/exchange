@@ -1,0 +1,22 @@
+sudo: required
+language: php
+dist: trusty
+
+php:
+   - 7.2
+
+addons:
+   chrome: stable
+
+install:
+   - cp .env.example .env
+   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+   - travis_retry npm install
+   - npm run prod
+
+before_script:
+   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+   - php artisan serve &
+
+script:
+   - php artisan dusk
