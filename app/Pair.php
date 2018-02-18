@@ -15,4 +15,9 @@ class Pair extends Model
     {
         return $this->belongsTo(Currency::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
