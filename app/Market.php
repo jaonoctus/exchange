@@ -10,4 +10,9 @@ class Market extends Model
     {
         return $this->belongsTo(Currency::class);
     }
+
+    public function pairs()
+    {
+        return $this->hasMany(Pair::class);
+    }
 }
