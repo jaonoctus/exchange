@@ -17,4 +17,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    public function askTrades()
+    {
+        return $this->hasMany(Trade::class, 'asker_id');
+    }
+
+    public function bidTrades()
+    {
+        return $this->hasMany(Trade::class, 'bidder_id');
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateTradesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,19 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('trades', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('pair_id');
             $table->foreign('pair_id')->references('id')->on('pairs')->onDelete('cascade');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('asker_id');
+            $table->foreign('asker_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('bidder_id');
+            $table->foreign('bidder_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type', ['ASK', 'BID']);
             $table->decimal('amount');
-            $table->decimal('filled')->nullable();
             $table->decimal('price');
+            $table->decimal('ask_fee');
+            $table->decimal('bid_fee');
             $table->timestamps();
         });
     }
@@ -34,6 +37,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('trades');
     }
 }
