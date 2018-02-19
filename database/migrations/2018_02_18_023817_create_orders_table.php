@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('pair_id');
-            $table->foreign('pair_id')->references('id')->on('pairs')->onDelete('cascade');
+            $table->foreign('pair_id')->references('id')->on('market_pair')->onDelete('cascade');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type', ['ASK', 'BID']);

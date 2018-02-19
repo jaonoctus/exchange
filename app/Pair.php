@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pair extends Model
 {
+    protected $table = 'market_pair';
+
+    protected $fillable = ['currency_id'];
+
+    protected $appends = ['name'];
+
     public function market()
     {
         return $this->belongsTo(Market::class);
@@ -24,5 +30,10 @@ class Pair extends Model
     public function trades()
     {
         return $this->hasMany(Trade::class);
+    }
+
+    public function getNameAttribute()
+    {
+        return "{$this->currency->symbol}{$this->market->currency->symbol}";
     }
 }

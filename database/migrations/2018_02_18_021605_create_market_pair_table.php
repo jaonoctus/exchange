@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePairsTable extends Migration
+class CreateMarketPairTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePairsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pairs', function (Blueprint $table) {
+        Schema::create('market_pair', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('market_id');
             $table->foreign('market_id')->references('id')->on('markets')->onDelete('cascade');
