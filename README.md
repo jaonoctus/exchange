@@ -13,18 +13,20 @@ To run this in your local environment, you will need to have previously installe
 - a database like sqlite, mysql or mariadb for example
 
 ## How to run locally
-1. On the root of the project, install laravel dependencies with ```composer install```
+1. On the root of the project, run `composer install` to install dependencies from `composer.json`.
 
-2. Create a database, make a copy of the file .env-example with name .env and change the database settings to match with your new database
+2. Create a database, run `cp .env.example .env` and change the database settings.
 
-3. run ```php artisan key:generate```
+3. Run `php artisan key:generate`.
 
-4. run ```php artisan migrate:fresh --seed```
+4. Run `php artisan migrate:fresh --seed`.
 
-5. Install the dependencies from package.json with ```npm install```
+5. Run `npm install` to install the dependencies from `package.json`.
 
-6. Run the laravel server with ```php artisan serve```
+6. Run `npm dev` or `npm prod` to generate the CSS and JS.
 
-7. Access http://localhost:8000 in your browser
+7. Run `php artisan serve` to start the laravel server.
 
-8. That's all folks :)
+8. Access [http://localhost:8000](http://localhost:8000) in your browser.
+
+9. That's all folks! :smile:
