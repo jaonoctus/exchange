@@ -20,9 +20,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type', ['ASK', 'BID']);
-            $table->decimal('amount');
-            $table->decimal('filled')->nullable();
-            $table->decimal('price');
+            $table->decimal('amount', 16, 8);
+            $table->decimal('filled', 16, 8)->nullable();
+            $table->decimal('price', 16, 8);
             $table->timestamps();
         });
     }

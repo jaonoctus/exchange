@@ -22,10 +22,10 @@ class CreateTradesTable extends Migration
             $table->unsignedInteger('bidder_id');
             $table->foreign('bidder_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type', ['ASK', 'BID']);
-            $table->decimal('amount');
-            $table->decimal('price');
-            $table->decimal('ask_fee');
-            $table->decimal('bid_fee');
+            $table->decimal('amount', 16, 8);
+            $table->decimal('price', 16, 8);
+            $table->decimal('ask_fee', 16, 8);
+            $table->decimal('bid_fee', 16, 8);
             $table->timestamps();
         });
     }
