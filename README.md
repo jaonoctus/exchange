@@ -23,7 +23,7 @@ To run this in your local environment, you will need to have previously installe
 
 5. Run `npm install` to install the dependencies from `package.json`.
 
-6. Run `npm dev` or `npm prod` to generate the CSS and JS.
+6. Run `sudo npm run dev` or `sudo npm run prod` to generate the CSS and JS.
 
 7. Run `php artisan serve` to start the laravel server.
 
